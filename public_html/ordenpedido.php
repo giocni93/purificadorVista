@@ -725,16 +725,24 @@ if(isset($_SESSION['user'])){
                 
             }
             
+           
+            
             function cbocredito(){
                if(document.getElementsByName("fecha_instalacion")[0].value==""){
                    alert("La fecha esta vacia ");
                }else{
-                   if(document.getElementsByName("cboxcredito")[0].value == "Credito"){
-                    openDialog(2);
-                    document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
+                    if(document.getElementsByName("txtcedula")[0].value==""){
+                        alert("Los campos estan vacios por favor completelos");
+                    }else{
+                        if(document.getElementsByName("cboxcredito")[0].value == "Credito"){
+                            openDialog(2);
+                            document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
+                        }
+                    }
+                       
                 }
-               }
             }
+            
             
             function verificarcampos(){
                 var txt1 = document.getElementsByName("txtcuotas");
@@ -1068,17 +1076,17 @@ if(isset($_SESSION['user'])){
                         </div>
                         
                         <div class="div_form">
-                            <label>Forma De Pago:</label><br /> <br />
-                            <select name="cboxcredito" onchange="javascript:cbocredito()">
-                                <option value="Contado">Contado</option>
-                                <option value="Credito">Credito</option>
+                            <label>Vendedor:</label><br /> <br /> 
+                            <select name="cboxvendedor">
+                                
                             </select>
                         </div>
                         
                         <div class="div_form">
-                            <label>Vendedor:</label><br /> <br /> 
-                            <select name="cboxvendedor">
-                                
+                            <label>Forma De Pago:</label><br /> <br />
+                            <select name="cboxcredito" onclick="javascript:cbocredito();">
+                                <option value="Contado">Contado</option>
+                                <option value="Credito">Credito</option>
                             </select>
                         </div>
                         
