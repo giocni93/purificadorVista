@@ -1,0 +1,334 @@
+/*!
+ * avgrund 0.1
+ * http://lab.hakim.se/avgrund
+ * MIT licensed
+ *
+ * Created by Hakim El Hattab, http://hakim.se
+ */
+
+.avgrund-active body {
+    
+	-webkit-transform: scale( 0.9 );
+	   -moz-transform: scale( 0.9 );
+	    -ms-transform: scale( 0.9 );
+	     -o-transform: scale( 0.9 );
+	        transform: scale( 0.9 );
+}
+
+.avgrund-cover {
+	position: fixed;
+	width: 100%;
+        height: 200%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0;
+	background: rgba( 0, 0, 0, 0.5 );
+}
+	.avgrund-active .avgrund-cover {
+		visibility: visible;
+		opacity: 1;
+                
+	}
+
+.avgrund-contents {
+	position: relative;
+	max-width: 100%;
+	height: 100%;
+}
+	.avgrund-active .avgrund-contents {
+		-webkit-filter: blur(2px);
+		   -moz-filter: blur(2px);
+		    -ms-filter: blur(2px);
+		     -o-filter: blur(2px);
+		        filter: blur(2px);
+	}
+        
+	.no-blur.avgrund-active .avgrund-contents {
+		-webkit-filter: none;
+		   -moz-filter: none;
+		    -ms-filter: none;
+		     -o-filter: none;
+		        filter: none;
+	}
+
+.avgrund-popup {
+	position: absolute;
+	width: 340px;
+	height: 180px;
+	left: 50%;
+	top: 50%;
+	margin: -130px 0 0 -190px;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 200;
+	padding: 20px;
+
+	background: white;
+	box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
+	border-radius: 3px;
+
+	-webkit-transform: scale( 0.8 );
+	   -moz-transform: scale( 0.8 );
+	    -ms-transform: scale( 0.8 );
+	     -o-transform: scale( 0.8 );
+	        transform: scale( 0.8 );
+                
+             
+}
+
+.avgrund-popup9 {
+	position: absolute;
+	width: 540px;
+	height: auto;
+	left: 50%;
+	top: 130%;
+	margin: -130px 0 0 -190px;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 200;
+	padding: 20px;
+
+	background: white;
+	box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
+	border-radius: 3px;
+
+	-webkit-transform: scale( 0.8 );
+	   -moz-transform: scale( 0.8 );
+	    -ms-transform: scale( 0.8 );
+	     -o-transform: scale( 0.8 );
+	        transform: scale( 0.8 );
+                
+             
+}
+
+.avgrund-popup10 {
+	position: absolute;
+	width: 480px;
+	height: auto;
+	left: 50%;
+	top: 30%;
+	margin: -130px 0 0 -190px;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 200;
+	padding: 20px;
+
+	background: white;
+	box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
+	border-radius: 3px;
+
+	-webkit-transform: scale( 0.8 );
+	   -moz-transform: scale( 0.8 );
+	    -ms-transform: scale( 0.8 );
+	     -o-transform: scale( 0.8 );
+	        transform: scale( 0.8 );
+                
+             
+}
+
+	.avgrund-active .avgrund-popup-animate {
+		visibility: visible;
+		opacity: 1;
+
+		-webkit-transform: scale( 1.1 );
+		   -moz-transform: scale( 1.1 );
+		    -ms-transform: scale( 1.1 );
+		     -o-transform: scale( 1.1 );
+		        transform: scale( 1.1 );
+                        
+                     -webkit-filter: blur(0);
+		   -moz-filter: blur(0);
+		    -ms-filter: blur(0);
+		     -o-filter: blur(0);
+		        filter: blur(0);
+	}
+	.avgrund-popup.stack {
+		-webkit-transform: scale( 1.5 );
+		   -moz-transform: scale( 1.5 );
+		    -ms-transform: scale( 1.5 );
+		     -o-transform: scale( 1.5 );
+		        transform: scale( 1.5 );
+	}
+	.avgrund-active .avgrund-popup.stack {
+		-webkit-transform: scale( 1.1 );
+		   -moz-transform: scale( 1.1 );
+		    -ms-transform: scale( 1.1 );
+		     -o-transform: scale( 1.1 );
+		        transform: scale( 1.1 );
+	}
+
+
+.avgrund-ready body,
+.avgrund-ready .avgrund-contents,
+.avgrund-ready .avgrund-popup,
+.avgrund-ready .avgrund-cover {
+	-webkit-transform-origin: 50% 50%;
+	   -moz-transform-origin: 50% 50%;
+	    -ms-transform-origin: 50% 50%;
+	     -o-transform-origin: 50% 50%;
+	        transform-origin: 50% 50%;
+
+	-webkit-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	   -moz-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	    -ms-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	     -o-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.avgrund-ready .avgrund-popup.no-transition {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	    -ms-transition: none;
+	     -o-transition: none;
+	        transition: none;
+}
+
+#categoria-popup , #tipo-popup{
+    width: 980px;
+    height: auto;
+    top: 26%;
+    left: 29%;
+    box-sizing: border-box;
+     background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#modiInv-popup{
+    width: 600px;
+    height: auto;
+    top: 40%;
+    left: 41%;
+    padding-left: 40px;
+    
+     background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#modiCat-popup{
+    padding-left: 40px;
+    
+     background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#msg-popup{
+    height: auto;
+}
+
+#buscarMan-popup{
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#modiMan-popup{
+    width: 900px;
+    height: auto;
+    top: 26%;
+    left: 31%;
+    
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#manExt-popup{
+    width: 970px;
+    height: auto;
+    top: 26%;
+    left: 27%;
+    
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#His-popup{
+    
+    width: 400px;
+    height: auto;
+    
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#Man-popup{
+    
+    width: 500px;
+    height: 510px;
+    top: 27%;
+    left: 45%;
+    
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#Observacion-popup{
+    width: 400px;
+    height: 400px;
+    top: 35%;
+    left: 47%;
+    padding: 35px;
+    
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#orden-popup{
+    width: 730px;
+    height: auto;
+    top: 35%;
+    left: 35%;
+    padding: 35px;
+    
+    background: #fff;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}

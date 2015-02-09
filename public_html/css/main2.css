@@ -1,0 +1,446 @@
+body,html{
+    padding: 2px;
+    margin: 0;
+    height:100%;
+    overflow: hidden;
+    
+}
+
+body{
+  overflow-y: scroll;
+  background-color: #F5F5F5;
+}
+
+#div_formularios{
+    width: 1070px;
+    margin-top: 10px;
+    height: auto;
+    float: right;
+    background-color: white;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    /*border-left: 1px solid #cccccc;*/
+}
+
+#div_formularios2{
+    width: 1070px;
+    margin-top: 10px;
+
+    height: 935px;
+
+    height: 1300px;
+
+    float: right;
+    background-color: white;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    /*border-left: 1px solid #cccccc;*/
+}
+
+#div_formularios4{
+    width: 1070px;
+    margin-top: 10px;
+
+    height: 350px;
+    float: right;
+    background-color: white;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    /*border-left: 1px solid #cccccc;*/
+}
+
+#div_formularios5{
+    width: 1070px;
+    margin-top: 10px;
+
+    height: auto;
+    float: right;
+    background-color: white;
+     -moz-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      -webkit-border-radius: 10px;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    /*border-left: 1px solid #cccccc;*/
+}
+
+.rectangle {
+ background: #E53935;
+ height: 50px;
+ width: 380px;
+ position: relative;
+ padding-left: 10px;
+ left:-15px;
+ top: 70px;
+ float: left;
+ -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+ z-index: 100; /* the stack order: foreground */
+}
+
+.rectangle > h2,.rectangle1 > h2  {
+    color: white;
+    margin-top: 10px;
+}
+
+.triangle-l {
+ border-color: transparent #B71C1C transparent transparent;
+ border-style:solid;
+ border-width:15px;
+ height:0px;
+ width:0px;
+ position: relative;
+ left: -30px;
+ top: 105px;
+ z-index: 99; /* displayed under bubble */
+}
+
+.rectangle1 {
+ background: #E53935;
+ height: 50px;
+ width: 380px;
+ position: relative;
+ padding-left: 10px;
+ left:-405px;
+ top: 485px;
+ float: left;
+ -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+ z-index: 100; /* the stack order: foreground */
+}
+
+.rectangle1 > h2,.rectangle2 > h2  {
+    color: white;
+    margin-top: 10px;
+}
+
+.triangle-l1 {
+ border-color: transparent #B71C1C transparent transparent;
+ border-style:solid;
+ border-width:15px;
+ height:0px;
+ width:0px;
+ position: relative;
+ left: -30px;
+ top: 520px;
+ z-index: 99; /* displayed under bubble */
+}
+
+.rectangle2 {
+ color: white;   
+ background: #E53935;
+ height: 50px;
+ width: 380px;
+ position: relative;
+ padding-left: 10px;
+ left:-15px;
+ top: 695px;
+ float: left;
+ -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+ z-index: 100; /* the stack order: foreground */
+}
+
+.rectangle2 > h2,.rectangle3 > h2  {
+    color: white;
+    margin-top: 10px;
+}
+
+.triangle-l2 {
+ border-color: transparent #B71C1C transparent transparent;
+ border-style:solid;
+ border-width:15px;
+ height:0px;
+ width:0px;
+ position: relative;
+ left: -30px;
+ top: 750px;
+ z-index: 99; /* displayed under bubble */
+}
+
+.rectangle3 {
+ color: white;   
+ background: #E53935;
+ height: 50px;
+ width: 380px;
+ position: relative;
+ padding-left: 10px;
+ left: -405px;
+ top: 885px;
+ float: left;
+ -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+ z-index: 100; /* the stack order: foreground */
+}
+
+.triangle-l3 {
+ border-color: transparent #B71C1C transparent transparent;
+ border-style:solid;
+ border-width:15px;
+ height:0px;
+ width:0px;
+ position: relative;
+ left: -30px;
+ top: 920px;
+ z-index: 99; /* displayed under bubble */
+}
+
+#div_boton{  
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-left: 200px;
+    border-left: 100px;
+    width: 980px;
+    padding-left: 100px;
+}
+
+#div_{  
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 980px;
+    padding-left: 50px;
+}
+
+#div_2{  
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 680px;
+    padding-left: 20px;
+    
+}
+
+#div_3{  
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 100%;
+    padding-left: 20px;
+   
+}
+
+#div_4{  
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 980px;
+    padding-left: 50px;
+}
+
+.div_form{
+    float: left;
+    margin-left: 15px;
+    margin-right: 30px;
+}
+
+.div_form1{
+    float: left;
+    margin-left: 15px;
+    margin-right: 30px;
+    margin-top: 90px;
+}
+
+.div_form2{
+    float: left;
+    margin-left: 14px;
+    margin-right: 100px;
+}
+
+.div_form3{
+    float: left;
+    margin-left: -58px;
+    margin-right: 37px;
+}
+
+.div_form4{
+    float: left;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+select{
+  
+ padding:0.2em;
+ height: 33px;
+ width: 260px;
+ position: relative;
+ top: -10px;
+ -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+ border-radius: 6px;
+ background-color: #fff;
+ 
+  border:1px solid #aaa;
+
+  box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+
+  border-radius:2px;
+ 
+}
+
+select:hover, select:focus
+{
+    -moz-box-shadow:0px 0px .5em #339aff;
+    -webkit-box-shadow:0px 0px .5em #339aff;
+    box-shadow:0px 0px .5em #339aff;
+  
+    border:solid 1px #339aff;
+    color:#339aff;
+}
+
+.div_boton{
+  margin-top: 20px;
+  position: relative;
+  left: -600px;
+}
+
+#div_categoria{
+    position: relative;
+    left: -20px;
+    padding-left: 40px;
+    z-index: -5;
+    /*border-left: 1px solid #cccccc;*/
+}
+
+.div_tabla{
+    float: right;
+    width: 530px;
+    position: relative;
+    top: -40px;
+}
+
+.div_tablaTipo{
+    float: right;
+    position: relative;
+    width: 530px;
+    top: -60px;
+
+}
+
+.div_cat{
+    float: left;
+}
+
+.div_tip{
+    float: left;
+    position: relative;
+    top: -50px;
+}
+
+#div_tipo{
+    width: 880px;
+    height: auto;
+    position: relative;
+    padding-top: 50px;
+    left: -20px;
+    overflow: hidden;
+    margin-left: 40px;
+
+    border-top: 1px solid #ccc;
+}
+
+#div_tablaInv{
+    padding: 40px;
+    margin-right: 100px;
+}
+
+#div_tablaInv3{
+   
+    padding: 40px;
+    margin-right: 100px;
+}
+
+#div_tablaInv1{
+    //width: 600px;
+    padding: 35px;
+    margin-right: 50px;
+}
+
+#div_tablaInv2{
+    width: 600px;
+    padding: 35px;
+    margin-right: 50px;
+}
+
+#btnRegistrarInv{
+    position: relative;
+    left: 0px;
+    top: 35px;
+}
+
+#btnRegistrarInv2{
+    position: relative;
+    left: 0px;
+    top: 35px;
+}
+
+#btnRegistrarInv3{
+    position: relative;
+    left: -450px;
+    top: 335px;
+}
+
+#btnRegistrarInv4{
+    position: relative;
+    left: 330px;
+    top: -760px;
+}
+
+#btnRegistrarInv5{
+    position: relative;
+    left: -105px;
+    top: -850px;
+}
+
+#btnRegistrarInv33{
+    position: relative;
+    left: -110px;
+    top: -940px;
+}
+
+#btnRegistrarInv6{
+    position: relative;
+    left: -10px;
+    top: 15px;
+}
+
+#btnRegistrarInv7{
+    position: relative;
+    right: -40px;
+    left: auto;
+    top: 15px;
+}
+
+
+#btnRegistrarInv31{
+    position: relative;
+    left: -60px;
+    top: 75px;
+}
+
+
+#btnRegistrarInv32{
+    position: relative;
+    left: 140px;
+    top: 32px;
+}
+
+#btnRegistrarInv8{
+    position: relative;
+    left: -30px;
+    top: -850px;
+}

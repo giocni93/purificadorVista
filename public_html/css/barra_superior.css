@@ -1,0 +1,73 @@
+#div_cab{
+    height: 100px;
+    width: 100%;
+    background: url(../img/banner.jpg);
+    background-size: 100% 180px;
+    background-position-y: -80px;
+    background-repeat: no-repeat;
+    
+     border-bottom: 1px solid #cccccc;
+     -moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -khtml-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+      -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#img_logo{
+    width: 300px;
+    height: 90px;
+    position: relative;
+    top: -10px;
+    left: 50px;
+}
+
+#div_usuario{
+    width: 400px;
+    height: 40px;
+    float: right;
+    margin-top: 5px;
+    padding-right: 5px;
+}
+
+#div_controles{
+    width: 400px;
+    height: 20px;
+    float: right;
+    position: relative;
+    margin-top: 5px;
+    left: 400px;
+    top: 70px;
+}
+
+#a_cerrar{
+    color: white;
+    position: relative;
+    left: 240px;
+}
+
+#a_vendedores{
+    width: auto;
+    color: white;
+    margin-left: 175px;
+    padding-right: 10px;
+     border-right: 1px solid #cccccc;
+}
+
+#a_usuarios{
+    width: auto;
+    color: white;
+    margin-left: 85px;
+    padding-right: 10px;
+     border-right: 1px solid #cccccc;
+}
+
+#a_cerrar:hover ,#a_usuarios:hover , #a_vendedores:hover{
+    color: #91caff;
+}
+
+#lbl_usuario,#lbl_rol{
+    color: #555555;
+    float: right;
+    position: relative;
+    right: 5px;
+    top: 5px;
+}
