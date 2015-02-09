@@ -294,6 +294,13 @@ if(isset($_SESSION['user'])){
                 document.getElementsByName("txtreferenciafamiliar1")[0].value="";
                 document.getElementsByName("txtreferenciatelefono1")[0].value="";
                 document.getElementsByName("fecha_instalacion")[0].value="";
+                //location.reload();
+                //location.href = "http://localhost/purificadorVista/public_html/ordenpedido.php";
+            }
+            
+            function impresion(){
+                document.frm_reg.action = "http://localhost/purificadorServidor/ordeninstalacion.php";
+                document.frm_reg.submit();
             }
             
             function registrarplanpago(){
@@ -313,8 +320,7 @@ if(isset($_SESSION['user'])){
                      success: function (data, status, jqXHR) {
                          if(data.estado == 1){
                              alert("Se ha Registrado este pedido");
-                             document.frm_reg.action = "http://localhost/purificadorServidor/ordeninstalacion.php";
-                             document.frm_reg.submit();
+                             impresion();
                              borrarCampos();
                              closeDialog(2);
                              //location.reload();
@@ -511,16 +517,16 @@ if(isset($_SESSION['user'])){
                                  registrarConyuge();
                                  registrarordenpedido();
                                  //alert(data.estado);
-                                 bandera = false;
+                                 //bandera = false;
                              }
                          },
                          error: function (jqXHR, status) {
                              alert("error cliente");
                          }
                     });
-                    //alert("bandera false");
+                    alert("bandera false");
                 }else{
-                    //alert("bandera true");
+                    alert("bandera true");
                     registrarordenpedido();
                 }    
                 
@@ -711,21 +717,28 @@ if(isset($_SESSION['user'])){
                closeDialog(1);
             }
             
-            var bandera = false;
+            var bandera = true;
             function credito(){
                 if(document.getElementsByName("cboxcredito")[0].value == "Contado"){
                     registrarCli();
-                }else{
-                    
-                    openDialog(2);
-                    document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
                 }
                 
             }
             
+            function cbocredito(){
+               if(document.getElementsByName("fecha_instalacion")[0].value==""){
+                   alert("La fecha esta vacia ");
+               }else{
+                   if(document.getElementsByName("cboxcredito")[0].value == "Credito"){
+                    openDialog(2);
+                    document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
+                }
+               }
+            }
+            
             function verificarcampos(){
                 var txt1 = document.getElementsByName("txtcuotas");
-                var val  = document.getElementsByName("valorsuma")[0].value
+                var val  = document.getElementsByName("valorsuma")[0].value;
                 var tot = 0;var sum = 0;
                     for(var i = 0; i<txt1.length; i++){
                         //alert(txt1[i].value);
@@ -748,7 +761,7 @@ if(isset($_SESSION['user'])){
                 document.getElementById("campos").innerHTML = "";
                     for(i=1;i<=numcuo;i++){
                         document.getElementById("campos").innerHTML += "<div class='div_form'><label style='width:150px;'>Cuota #"+i+"</label>\n\
-            <input name='txtcuotas' style='margin-top:5px; position:relative; left:-50px;' type='number'/></div><br/>";
+                        <input name='txtcuotas' style='margin-top:5px; position:relative; left:-50px;' type='number'/></div><br/>";
                         
                     } 
                   //document.getElementById("campos").innerHTML += "";
@@ -904,7 +917,7 @@ if(isset($_SESSION['user'])){
             <div class="triangle-l3"></div>
 
                 <!--<button onclick="javascript:openDialog();">Open Avgrund</button>-->
-                <form class="contact_form" name="frm_reg" action="javascript:javascript:credito();"  method="post" target="_blank">
+                <form class="contact_form" name="frm_reg" id="form_id" action="javascript:credito();"  method="post" target="_blank">
                     <div id="div_4">
                         
                         <div class="div_form">
@@ -1043,13 +1056,10 @@ if(isset($_SESSION['user'])){
                             <label></label><br /> <br /> 
                             <input  type="hidden" /><br/><br/><br/><br/><br/><br/><br/>
                         </div>
-                        
+                        <!--aqui va Fecha instalacion -->
                         <div class="div_form">
-                            <label>Forma De Pago:</label><br /> <br />
-                            <select name="cboxcredito" >
-                                <option value="Contado">Contado</option>
-                                <option value="Credito">Credito</option>
-                            </select>
+                            <label>Fecha Instalacion:</label><br /> <br /> 
+                            <input name="fecha_instalacion" type="date" required/><br/><br/>
                         </div>
                         
                         <div class="div_form">
@@ -1058,8 +1068,11 @@ if(isset($_SESSION['user'])){
                         </div>
                         
                         <div class="div_form">
-                            <label>Fecha Instalacion:</label><br /> <br /> 
-                            <input name="fecha_instalacion" type="date" required/><br/><br/>
+                            <label>Forma De Pago:</label><br /> <br />
+                            <select name="cboxcredito" onchange="javascript:cbocredito()">
+                                <option value="Contado">Contado</option>
+                                <option value="Credito">Credito</option>
+                            </select>
                         </div>
                         
                         <div class="div_form">
@@ -1077,11 +1090,10 @@ if(isset($_SESSION['user'])){
                             <input name="ocultarmodelo" type="text" style="visibility: hidden" />
                         </div>
                         
-                        <button id="btnRegistrarInv3" onclick="javascript:function(){document.frm_reg.submit();}" >Registrar</button>
+                        <button id="btnRegistrarInv3" onsubmit="javascript:function(){document.frm_reg.submit();}" >Registrar</button>
                         
                     </div>
                         
-                    
                 </form>
                 <button id="btnRegistrarInv5" onclick="javascript:mostrarclientes()" >Clientes Registrados</button>
                 <button id="btnRegistrarInv33" onclick="javascript:redireccionar();">Modificar Fecha Instalacion</button>
