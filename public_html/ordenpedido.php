@@ -731,7 +731,9 @@ if(isset($_SESSION['user'])){
                if(document.getElementsByName("fecha_instalacion")[0].value==""){
                    alert("La fecha esta vacia ");
                }else{
-                    if(document.getElementsByName("txtcedula")[0].value==""){
+                    if(document.getElementsByName("txtcedula")[0].value=="" && document.getElementsByName("txtnombres")[0].value==""
+                           && document.getElementsByName("txtapellido")[0].value=="" && document.getElementsByName("txtdireccion")[0].value==""
+                           && document.getElementsByName("txttelefono")[0].value=="" ){
                         alert("Los campos estan vacios por favor completelos");
                     }else{
                         if(document.getElementsByName("cboxcredito")[0].value == "Credito"){
