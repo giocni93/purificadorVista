@@ -108,7 +108,7 @@ if(isset($_SESSION['user'])){
                     <div class=icon> 
                     <div id="icon-pedido"></div>
                     </div>
-                      <a href="ordenpedido.php"><span>Orden de pedido</span></a>
+                      <a href="orden_pedido.php"><span>Orden de pedido</span></a>
                   </div>
                </li>
                <li class="var_nav">

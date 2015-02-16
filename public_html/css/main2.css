@@ -391,7 +391,7 @@ select:hover, select:focus
 #btnRegistrarInv3{
     position: relative;
     left: -450px;
-    top: 335px;
+    top: 1055px;
 }
 
 #btnRegistrarInv4{
@@ -402,14 +402,14 @@ select:hover, select:focus
 
 #btnRegistrarInv5{
     position: relative;
-    left: -105px;
-    top: -850px;
+    left:  -150px;
+    top: -250px;
 }
 
 #btnRegistrarInv33{
     position: relative;
     left: -110px;
-    top: -940px;
+    top: -810px;
 }
 
 #btnRegistrarInv6{
@@ -420,8 +420,8 @@ select:hover, select:focus
 
 #btnRegistrarInv7{
     position: relative;
-    right: -40px;
-    left: auto;
+    left: 30px;;
+    right: 60px;
     top: 15px;
 }
 

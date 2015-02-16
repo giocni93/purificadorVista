@@ -34,7 +34,7 @@ if(isset($_SESSION['user'])){
             var dataCli;  
             var dataRef;
             var dataCon;
-            var bandera = false;
+            
            
                 
             function initTabla(){
@@ -159,7 +159,7 @@ if(isset($_SESSION['user'])){
                 });
             }
             
-            ///////////
+            ///////////lista inventario
             
             function listaInventario(id){
                 jQuery.ajax({
@@ -249,7 +249,7 @@ if(isset($_SESSION['user'])){
             
             function jsonRegistroPlanpago(formapago,val){
                 //txt1 = document.getElementsByName("txtcuotas");
-                if(bandera==1){
+                if(combo==1){
                     var cuo = 1;
                     return JSON.stringify({
                         "tipo":formapago,
@@ -720,12 +720,13 @@ if(isset($_SESSION['user'])){
             var bandera = true;
             function credito(){
                 if(document.getElementsByName("cboxcredito")[0].value == "Contado"){
+                    combo = 1;
                     registrarCli();
                 }
                 
             }
             
-           
+            var combo;
             
             function cbocredito(){
                if(document.getElementsByName("fecha_instalacion")[0].value==""){
@@ -737,6 +738,7 @@ if(isset($_SESSION['user'])){
                         alert("Los campos estan vacios por favor completelos");
                     }else{
                         if(document.getElementsByName("cboxcredito")[0].value == "Credito"){
+                            combo = 2;
                             openDialog(2);
                             document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
                         }
@@ -757,7 +759,12 @@ if(isset($_SESSION['user'])){
                         //alert(tot);
                     }   
                     if(tot==val){
-                        registrarCli();
+                        if(bandera==true){
+                            registrarCli();
+                        }else{
+                            registrarordenpedido();
+                        }
+                        
                     }else{
                         alert("Error al digitar las cuotas el total de las cuotas no es igual al valor del producto");
                     }
@@ -1105,7 +1112,7 @@ if(isset($_SESSION['user'])){
                     </div>
                         
                 </form>
-                <button id="btnRegistrarInv5" onclick="javascript:mostrarclientes()" >Clientes Registrados</button>
+                <button id="btnRegistrarInv5" onclick="javascript:mostrarclientes();" >Clientes Registrados</button>
                 <button id="btnRegistrarInv33" onclick="javascript:redireccionar();">Modificar Fecha Instalacion</button>
                 <!--<button id="btnRegistrarInv8" onclick="javascript:mostrarvendedor()" >Registrar Vendedores</button>-->
                         
@@ -1162,6 +1169,25 @@ if(isset($_SESSION['user'])){
         <aside id="categoria-cliente" class="avgrund-popup9"> 
             <form class="contact_form" action="javascript:mostrarcampos();">
                 
+                <h2 style="text-align: center; margin-left: 45px;">Registrar Cuotas</h2><br/>
+                <h3 style="color:#555555; margin-left: 65px;">Costo del producto: </h3>
+                <h3 style="color:#555555; margin-left: 260px; margin-top: -22px;" id="preciotxt"></h3>
+                
+                <div class="div_form" style="margin-bottom: 50px;">
+                    <label># Cuotas</label><br /> <br /> 
+                    <input name="numerosdecuotas" type="text"/><br/><br/>
+                </div>
+                 <button id="btnRegistrarInv6">Aceptar</button>
+                
+                 <div id="campos" style="margin-top: 10px; "> 
+                </div><br/>
+            </form>
+            <button id='btnRegistrarInv7' onclick='javascript:verificarcampos();'>Registrar</button>
+        </aside>
+        
+        <!--<aside id="categoria-cliente" class="avgrund-popup9"> 
+            <form class="contact_form" action="javascript:mostrarcampos();">
+                
                 <h2 style="text-align: center">Registrar Cuotas</h2><br/>
                 <h3 style="color:#555555; margin-left: 10px;">Costo del producto: </h3>
                 <h3 style="color:#555555; margin-left: 195px; margin-top: -22px;" id="preciotxt"></h3>
@@ -1176,7 +1202,7 @@ if(isset($_SESSION['user'])){
             </form><br/>
             <button id='btnRegistrarInv7' onclick='javascript:verificarcampos();'>Registrar</button>
             
-        </aside>
+        </aside>-->
         
         <aside id="categoria-vendedor" class="avgrund-popup10"> 
             <form class="contact_form" action="javascript:registrarVendedor();">

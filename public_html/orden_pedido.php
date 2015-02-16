@@ -34,9 +34,8 @@ if(isset($_SESSION['user'])){
             var dataCli;  
             var dataRef;
             var dataCon;
-            var bandera = false;
-           
-                
+            var bandera = 1;
+            
             function initTabla(){
                 //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 $('#tablaInv').dataTable({
@@ -60,105 +59,12 @@ if(isset($_SESSION['user'])){
             function init(){
                 listaCli();
                 listaCategorias();
+                listaVendedores();
             }
             
+            //////////lista inventario
             
-            /////////////imprimir orden pedido
-            function imprimir_orden(){
-                jQuery.ajax({
-                     type: "GET",
-                     url: servidor+"ordenpedido",
-                     dataType: "json",
-                     success: function (data, status, jqXHR) {
-                        
-                         if(data != null){
-                             cbox.innerHTML = "";
-                             
-                             for(var i = 0; i < data.length ; i++){
-                                
-                             }
-                             //consultaTipo();
-                             //initTablaCat();
-                             
-                         }
-                     },
-                     error: function (jqXHR, status) {
-                         alert("error");
-                     }
-                });
-            }
-            
-            ////lista de categorias
-            
-            function listaCategorias() {
-                jQuery.ajax({
-                     type: "GET",
-                     url: servidor+"categoria",
-                     dataType: "json",
-                     success: function (data, status, jqXHR) {
-                         var cbox = document.getElementsByName("cboxCategoria")[0];
-                         
-                         if(data != null){
-                             cbox.innerHTML = "";
-                             
-                             for(var i = 0; i < data.length ; i++){
-                                 cbox.innerHTML += "<option value = '"+data[i].Id+"' >"+data[i].Nombre+"</option>";
-                                 document.getElementsByName("ocultartipo")[0].value = data[i].Nombre;
-                                 
-                             }
-                             
-                             consultaTipo();
-                             
-                             //initTablaCat();
-                             
-                         }
-                     },
-                     error: function (jqXHR, status) {
-                         alert("error");
-                     }
-                });
-            }
-            /////////lista inventario
-           
-            function consultaInvetario(){
-                var id = document.getElementsByName("cboxtiponventario")[0].value;
-                //alert(val);
-                inv = id;
-                //alert(inv);
-                listaInventario(id);
-                
-            }
-            
-            function consultavalor(){
-                var id = document.getElementsByName("cboxinventario")[0].value;
-                
-                precio(id);
-            }
-            
-            /////////consultar precio
-            
-            function precio(id){
-                
-                jQuery.ajax({
-                     type: "GET",
-                     url: servidor+"precioinventario/"+id,
-                     dataType: "json",
-                     success: function (data, status, jqXHR) {
-                         
-                         if(data != null){
-                             
-                            document.getElementsByName("valorsuma")[0].value = data[0].valor;
-                             cambioTXT();
-                         }
-                         
-                     },
-                     error: function (jqXHR, status) {
-                         alert("error oo");
-                     }
-                });
-            }
-            
-            ///////////
+             ///////////lista inventario
             
             function listaInventario(id){
                 jQuery.ajax({
@@ -182,14 +88,13 @@ if(isset($_SESSION['user'])){
                              }
                              //consultaTipo();
                              //initTablaCat();
-                             
                          }
                          
                             //alert(id1);
                             
                      },
                      error: function (jqXHR, status) {
-                         alert("error oo");
+                         alert("error inventario");
                      }
                 });
                 
@@ -230,55 +135,259 @@ if(isset($_SESSION['user'])){
                          
                      },
                      error: function (jqXHR, status) {
-                         alert("error");
+                         alert("error tipo inventario");
                      }
                 });
             }
             
+            ////lista de categorias
+            
+            function listaCategorias() {
+                jQuery.ajax({
+                     type: "GET",
+                     url: servidor+"categoria",
+                     dataType: "json",
+                     success: function (data, status, jqXHR) {
+                         var cbox = document.getElementsByName("cboxCategoria")[0];
+                         
+                         if(data != null){
+                             cbox.innerHTML = "";
+                             
+                             for(var i = 0; i < data.length ; i++){
+                                 cbox.innerHTML += "<option value = '"+data[i].Id+"' >"+data[i].Nombre+"</option>";
+                                 document.getElementsByName("ocultartipo")[0].value = data[i].Nombre;
+                                 
+                             }
+                             
+                             consultaTipo();
+                             
+                             //initTablaCat();
+                             
+                         }
+                     },
+                     error: function (jqXHR, status) {
+                         alert("error cate");
+                     }
+                });
+            }
+            
+            function consultaInvetario(){
+                var id = document.getElementsByName("cboxtiponventario")[0].value;
+                //alert(val);
+                inv = id;
+                //alert(inv);
+                listaInventario(id);
+                
+            }
+            
+            function consultavalor(){
+                var id = document.getElementsByName("cboxinventario")[0].value;
+                
+                precio(id);
+            }
+            
+            function precio(id){
+                
+                jQuery.ajax({
+                     type: "GET",
+                     url: servidor+"precioinventario/"+id,
+                     dataType: "json",
+                     success: function (data, status, jqXHR) {
+                         
+                         if(data != null){
+                             
+                            document.getElementsByName("valorsuma")[0].value = data[0].valor;
+                             
+                         }
+                         
+                     },
+                     error: function (jqXHR, status) {
+                         alert("error precio");
+                     }
+                });
+            }
+            
+            ////lista clientes
+            function listaCli() {
+                jQuery.ajax({
+                     type: "GET",
+                     url: servidor+"consultarcliente",
+                     dataType: "json",
+                     success: function (data, status, jqXHR) {
+                         var tb = document.getElementById("tbody_tablaCon");
+                         tb.innerHTML = "";
+                         if(data != null){
+                             dataCli = data;
+                             for(var i = 0; i < data.length ; i++){
+                                 tb.innerHTML += "<tr>\n\
+                                 <td>"+data[i].cedula+"</td>\n\
+                                 <td>"+data[i].nombre+"</td>\n\
+                                 <td>"+data[i].apellido+"</td>\n\
+                                 <td>"+data[i].direccion_oficina+"</td>\n\
+                                 <td>"+data[i].telefono+"</td>\n\\n\
+                                 <td>"+data[i].email+"</td>\n\\n\\n\
+                                 <td>"+data[i].direccion_casa+"</td>\\n\
+                                 <td><a onclick='javascript:enviardatos("+i+");' class='btnModi'>Ver</a></td>\n\
+                                 </tr>";
+                             }
+                         }
+                         initTablaCon();
+                     },
+                     error: function (jqXHR, status) {
+                         alert("error lista cli");
+                     }
+                });
+            }
+            
+            ///lista de conyuge
+            
+            function listaCon(cedula) {
+                
+                jQuery.ajax({
+                     type: "GET",
+                     url: servidor+"codeudor/"+cedula,
+                     dataType: "json",
+                     success: function (data, status, jqXHR) {
+                         
+                         if(data != null){
+                             dataCon = data;
+                             for(var i = 0; i < data.length ; i++){
+                                document.getElementsByName("textconyuge")[0].value = data[0].nombre;
+                                document.getElementsByName("txtnit")[0].value = data[0].cedula; 
+                                document.getElementsByName("txtconyugedireccion")[0].value = data[0].direccion_oficina;
+                                document.getElementsByName("txtconyugetelefono")[0].value = data[0].telefono;
+                                document.getElementsByName("txtreferenciaconyuge")[0].value = data[0].referencia;
+                                document.getElementsByName("txtreferenciaconyugetel")[0].value = data[0].telefono_referencia;
+                             }
+                              
+                         }
+                         
+                        
+                     },
+                     error: function (jqXHR, status) {
+                         alert("error lista conyuge");
+                     }
+                });
+                
+            }
+            
+            ////////lista de referencia
+            function listaRefe(cedula) {
+                
+                jQuery.ajax({
+                     type: "GET",
+                     url: servidor+"referencia/"+cedula,
+                     dataType: "json",
+                     success: function (data, status, jqXHR) {
+                         
+                         if(data != null){
+                             dataRef = data;
+                            for(var i = 0; i < data.length ; i++){
+                                document.getElementsByName("txtreferenciafamiliar")[0].value  =  data[0].nombre;
+                                document.getElementsByName("txtreferenciatelefono")[0].value  =  data[0].telefono; 
+                                document.getElementsByName("txtreferenciafamiliar1")[0].value =  data[1].nombre;
+                                document.getElementsByName("txtreferenciatelefono1")[0].value =  data[1].telefono;
+                                
+                            }
+                              
+                         }
+                         
+                     },
+                     error: function (jqXHR, status) {
+                         alert("error lista refe");
+                     }
+                });
+                
+            }
+            
+            function listaVendedores() {
+                jQuery.ajax({
+                     type: "GET",
+                     url: servidor+"vendedor",
+                     dataType: "json",
+                     success: function (data, status, jqXHR) {
+                         var cbox = document.getElementsByName("cboxvendedor")[0];
+                         
+                         if(data != null){
+                             cbox.innerHTML = "";
+                             
+                             for(var i = 0; i < data.length ; i++){
+                                 cbox.innerHTML += "<option value = '"+data[i].nombres+" "+data[i].apellidos+"' >"+data[i].nombres+" "+data[i].apellidos+"</option>";
+                                 
+                             }
+                             
+                         }
+                     },
+                     error: function (jqXHR, status) {
+                         alert("error lista vendedor");
+                     }
+                });
+            }
+            
+            //////////Registros de toda la base de datos
+            
             ///////////////////registrar plan de pago
             
+            function jsonRegistroPlanpago(formapago,val){
+                //txt1 = document.getElementsByName("txtcuotas");
+                alert(combo);
+                if(combo==1){
+                    var cuo = 1;
+                    return JSON.stringify({
+                        "tipo":formapago,
+                        "monto": val,
+                        "numero_cuota": cuo,
+                        "valorCuota" : val
+                    });
+                }else{
+                    var cuo = document.getElementsByName("txtcuotas");
+                    var v = new Array();
+                        for(var i = 0; i<cuo.length; i++){
+                            ///alert(cuo[i].value);
+                            v.push(cuo[i].value);
+                    }
+                    
+                    var valor = 10000;
+                    return JSON.stringify({
+                        "tipo":formapago,
+                        "monto": val,
+                        "numero_cuota": cuo.length,
+                        "valorCuota" : v
+                    });
+                }
+            }
+            
+            ////registrar plan pago
             function registrarplanpago(){
                 var formpago = document.getElementsByName("cboxcredito")[0].value;
                 var val = document.getElementsByName("valorsuma")[0].value;
-                var cuo = document.getElementsByName("numcuotas")[0].value;
+                
+                alert(jsonRegistroPlanpago(formpago,val));
                 
                 jQuery.ajax({
-                   
+                        
                      type: "POST",
                      url: servidor+"planpago",
                      dataType: "json",
-		     data: jsonRegistroPlanpago(formpago,val,cuo),
+		     data: jsonRegistroPlanpago(formpago,val),
                      
                      success: function (data, status, jqXHR) {
                          if(data.estado == 1){
                              alert("Se ha Registrado este pedido");
-                             document.frm_reg.action = "http://localhost/purificadorServidor/ordeninstalacion.php";
-                             document.frm_reg.submit();
+                             bandera = 1;
+                             impresion();
+                             borrarCampos();
+                             closeDialog();
+                             //location.href = "http://localhost/purificadorVista/public_html/orden_pedido.php";
+                             //location.reload();
                          }
+                         
                      },
                      error: function (jqXHR, status) {
                          alert("error plan");
                      }
                 });
-            }
-            var vc = 0;
-            
-            function calcularCuotas(){
-                var monto = parseFloat(document.getElementsByName("valorsuma")[0].value);
-                var num = parseFloat(document.getElementsByName("numcuotas")[0].value);
-                vc = monto / num ;
-                document.getElementsByName("txtvalor")[0].value = vc;
                 
-            }
-            
-            function jsonRegistroPlanpago(formapago,val,cuo){
-                
-                return JSON.stringify({
-                    "tipo":formapago,
-                    "monto": val,
-                    "numero_cuota": cuo,
-                    "valorCuota" : vc
-                    });
             }
             
             ////////////registrar orden pedido
@@ -287,20 +396,19 @@ if(isset($_SESSION['user'])){
                 var desc = document.getElementsByName("descripcion_color")[0].value;
                 var fech_inst = document.getElementsByName("fecha_instalacion")[0].value;
                 var ced = document.getElementsByName("txtcedula")[0].value;
+                var vend = document.getElementsByName("cboxvendedor")[0].value;
                 var inve = idinv; 
-                alert(desc+" "+fech_inst+" "+ced+" "+inve);
+                //alert(desc+" "+fech_inst+" "+ced+" "+inve);
                 
                 jQuery.ajax({
                    
                      type: "POST",
                      url: servidor+"orden_pedido",
                      dataType: "json",
-		     data: jsonRegistroOrden(desc,fech_inst,ced,inve),
+		     data: jsonRegistroOrden(desc,fech_inst,ced,inve,vend),
                      
                      success: function (data, status, jqXHR) {
                          if(data.estado == 1){
-                            //document.getElementsByName("descripcion_color")[0].value="";
-                            //document.getElementsByName("fecha_instalacion")[0].value="";
                             registrarplanpago();
                          }
                      },
@@ -308,20 +416,21 @@ if(isset($_SESSION['user'])){
                          alert("error orden");
                      }
                 });
+                
             }
             
-            function jsonRegistroOrden(desc,fech_inst,ced,inve){
+            function jsonRegistroOrden(desc,fech_inst,ced,inve,vend){
                 
                 return JSON.stringify({
                     "descripcion": desc,
                     "idcliente": ced,
                     "idinventario":inve,
-                    "fechainstalacion": fech_inst
+                    "fechainstalacion": fech_inst,
+                    "vendedor": vend
                     });
             }
             
-            /////////////Conyuge JSON
-            
+            /////////registro conyuge
             function registrarConyuge() {
                 
                 var nom = document.getElementsByName("textconyuge")[0].value;
@@ -342,12 +451,7 @@ if(isset($_SESSION['user'])){
                          if(data.estado == 1){
                              //Mensaje de guardado
                              //alert(data.estado);
-                                /*document.getElementsByName("textconyuge")[0].value="";
-                                document.getElementsByName("txtnit")[0].value="";
-                                document.getElementsByName("txtconyugedireccion")[0].value="";
-                                document.getElementsByName("txtconyugetelefono")[0].value="";
-                                document.getElementsByName("txtreferenciaconyuge")[0].value="";
-                                document.getElementsByName("txtreferenciaconyugetel")[0].value="";*/
+                            
                                 
                          }
                      },
@@ -369,7 +473,7 @@ if(isset($_SESSION['user'])){
                     });
             }
             
-            /////////////Referencia JSON
+             /////////////Referencia JSON
             
             function jsonRegistroReferencia(nom,tel,id,nom1,tel1,id1){
                 
@@ -404,11 +508,7 @@ if(isset($_SESSION['user'])){
                          if(data.estado == 1){
                              //Mensaje de guardado
                              //alert(data.estado);
-                            /*document.getElementsByName("txtreferenciafamiliar")[0].value="";
-                            document.getElementsByName("txtreferenciatelefono")[0].value="";
                             
-                            document.getElementsByName("txtreferenciafamiliar1")[0].value="";
-                            document.getElementsByName("txtreferenciatelefono1")[0].value="";*/
                             
                          }
                      },
@@ -418,195 +518,186 @@ if(isset($_SESSION['user'])){
                 });
             }
             
-            
-            /////////////Conyuge Cliente
-            
-            function jsonRegistroCliente(ced,nomb,apel,dir,tel,email){
+            function jsonRegistroCliente(ced,nomb,apel,dir,dirof,tel,email,labor){
                 return JSON.stringify({
                     "cedula": ced,
                     "nombre": nomb,
                     "apellido": apel,
-                    "direccion_oficina": dir,
+                    "direccion_casa": dir,
+                    "direccion_oficina": dirof,
                     "telefono": tel,
-                    "email": email
+                    "email": email,
+                    "labor": labor
                     });
             }
-            
             ///////////registrar cliente
             function registrarCli() {
                 var ced = document.getElementsByName("txtcedula")[0].value;
                 var nomb = document.getElementsByName("txtnombres")[0].value;
                 var apel = document.getElementsByName("txtapellido")[0].value;
                 var dir = document.getElementsByName("txtdireccion")[0].value;
+                var dirof = document.getElementsByName("txtdiroficina")[0].value;
                 var tel = document.getElementsByName("txttelefono")[0].value;
                 var email = document.getElementsByName("txtcorreo")[0].value;
-                if(bandera == false){
+                var labor = document.getElementsByName("txtlabor")[0].value;
+                
+                
                     jQuery.ajax({
 
                          type: "POST",
                          url: servidor+"cliente",
                          dataType: "json",
-                         data: jsonRegistroCliente(ced,nomb,apel,dir,tel,email),
+                         data: jsonRegistroCliente(ced,nomb,apel,dir,dirof,tel,email,labor),
 
                          success: function (data, status, jqXHR) {
                              if(data.estado == 1){
                                  //Mensaje de guardado
-                                 registrarReferencia();
-                                 registrarConyuge();
-                                 registrarordenpedido();
-                                 alert(data.estado);
+                                registrarReferencia();
+                                registrarConyuge();
+                                registrarordenpedido();
+                                alert(data.estado);
                                  
-                                 /*document.getElementsByName("txtcedula")[0].value    = "";
-                                 document.getElementsByName("txtnombres")[0].value   = "";
-                                 document.getElementsByName("txtapellido")[0].value  = "";
-                                 document.getElementsByName("txtdireccion")[0].value = "";
-                                 document.getElementsByName("txttelefono")[0].value  = "";
-                                 document.getElementsByName("txtcorreo")[0].value    = "";*/
                              }
                          },
                          error: function (jqXHR, status) {
-                             alert("error cliente");
+                             alert("Error Cliente: esta cedula ya se encuentra registrado");
                          }
                     });
-                }else{
-                    registrarordenpedido();
-                }    
-                bandera = false;
-            } 
+                   
+            }
+            ///////Logica 
             
-            
-            
-            function mostrarclientes(){
-                openDialog(1);
+            function borrarCampos(){
+                document.getElementsByName("txtcedula")[0].value="";
+                document.getElementsByName("txtnombres")[0].value="";
+                document.getElementsByName("txtapellido")[0].value="";
+                document.getElementsByName("txtdireccion")[0].value="";
+                document.getElementsByName("txtdiroficina")[0].value="";
+                document.getElementsByName("txttelefono")[0].value="";
+                document.getElementsByName("txtcorreo")[0].value="";
+                document.getElementsByName("txtlabor")[0].value="";
+                document.getElementsByName("textconyuge")[0].value="";
+                document.getElementsByName("txtnit")[0].value="";
+                document.getElementsByName("txtconyugedireccion")[0].value="";
+                document.getElementsByName("txtconyugetelefono")[0].value="";
+                document.getElementsByName("txtreferenciaconyuge")[0].value="";
+                document.getElementsByName("txtreferenciaconyugetel")[0].value="";
+                document.getElementsByName("txtreferenciafamiliar")[0].value="";
+                document.getElementsByName("txtreferenciatelefono")[0].value="";
+                document.getElementsByName("txtreferenciafamiliar1")[0].value="";
+                document.getElementsByName("txtreferenciatelefono1")[0].value="";
+                document.getElementsByName("fecha_instalacion")[0].value="";
+                document.getElementsByName("descripcion_color")[0].value="";
+                //location.reload();
+                //location.href = "http://localhost/purificadorVista/public_html/ordenpedido.php";
             }
             
-            ////////lista de referencia
-            function listaRefe(cedula) {
-                
-                jQuery.ajax({
-                     type: "GET",
-                     url: servidor+"referencia/"+cedula,
-                     dataType: "json",
-                     success: function (data, status, jqXHR) {
-                         
-                         if(data != null){
-                             dataRef = data;
-                            for(var i = 0; i < data.length ; i++){
-                                document.getElementsByName("txtreferenciafamiliar")[0].value = data[0].nombre;
-                                document.getElementsByName("txtreferenciatelefono")[0].value = data[0].telefono; 
-                                document.getElementsByName("txtreferenciafamiliar1")[0].value = data[1].nombre;
-                                document.getElementsByName("txtreferenciatelefono1")[0].value = data[1].telefono;
-                                
-                            }
-                              
-                         }
-                         
-                     },
-                     error: function (jqXHR, status) {
-                         alert("error");
-                     }
-                });
-                
-            }
-            
-            ////lista clientes
-            function listaCli() {
-                jQuery.ajax({
-                     type: "GET",
-                     url: servidor+"consultarcliente",
-                     dataType: "json",
-                     success: function (data, status, jqXHR) {
-                         var tb = document.getElementById("tbody_tablaCon");
-                         tb.innerHTML = "";
-                         if(data != null){
-                             dataCli = data;
-                             for(var i = 0; i < data.length ; i++){
-                                 tb.innerHTML += "<tr>\n\
-                                 <td>"+data[i].cedula+"</td>\n\
-                                 <td>"+data[i].nombre+"</td>\n\
-                                 <td>"+data[i].apellido+"</td>\n\
-                                 <td>"+data[i].direccion_oficina+"</td>\n\
-                                 <td>"+data[i].telefono+"</td>\n\\n\
-                                 <td>"+data[i].email+"</td>\n\
-                                 <td><a onclick='javascript:enviardatos("+i+");' class='btnModi'>Ver</a></td>\n\
-                                 </tr>";
-                             }
-                         }
-                         initTablaCon();
-                     },
-                     error: function (jqXHR, status) {
-                         alert("error");
-                     }
-                });
-            }
-            
-            ///lista de conyuge
-            
-            function listaCon(cedula) {
-                
-                jQuery.ajax({
-                     type: "GET",
-                     url: servidor+"codeudor/"+cedula,
-                     dataType: "json",
-                     success: function (data, status, jqXHR) {
-                         
-                         if(data != null){
-                             dataCon = data;
-                             for(var i = 0; i < data.length ; i++){
-                                document.getElementsByName("textconyuge")[0].value = data[0].nombre;
-                                document.getElementsByName("txtnit")[0].value = data[0].cedula; 
-                                document.getElementsByName("txtconyugedireccion")[0].value = data[0].direccion_oficina;
-                                document.getElementsByName("txtconyugetelefono")[0].value = data[0].telefono;
-                                document.getElementsByName("txtreferenciaconyuge")[0].value = data[0].referencia;
-                                document.getElementsByName("txtreferenciaconyugetel")[0].value = data[0].telefono_referencia;
-                             }
-                              
-                         }
-                         
-                        
-                     },
-                     error: function (jqXHR, status) {
-                         alert("error");
-                     }
-                });
-                
+            function impresion(){
+                document.frm_reg.action = "http://localhost/purificadorServidor/ordeninstalacion.php";
+                document.frm_reg.submit();
             }
             
             function enviardatos(i){
                document.getElementsByName("txtcedula")[0].value = dataCli[i].cedula; 
                document.getElementsByName("txtnombres")[0].value = dataCli[i].nombre;
                document.getElementsByName("txtapellido")[0].value = dataCli[i].apellido;
-               document.getElementsByName("txtdireccion")[0].value = dataCli[i].direccion_oficina;
+               document.getElementsByName("txtdireccion")[0].value = dataCli[i].direccion_casa;
                document.getElementsByName("txttelefono")[0].value = dataCli[i].telefono;
                document.getElementsByName("txtcorreo")[0].value = dataCli[i].email;
+               document.getElementsByName("txtdiroficina")[0].value = dataCli[i].direccion_oficina;
+               document.getElementsByName("txtlabor")[0].value = dataCli[i].labor;
                listaRefe(dataCli[i].cedula);
                listaCon(dataCli[i].cedula);
-               bandera = true;
+               bandera = 0;
                closeDialog(1);
             }
             
-            function cambioTXT(){
+            var combo;
+            
+            function credito(){
                 
-                if(document.getElementsByName("cboxcredito")[0].value == "Contado"){
-                    document.getElementsByName("numcuotas")[0].value = "1";
-                    document.getElementsByName("txtvalor")[0].value = document.getElementsByName("valorsuma")[0].value;
-                    document.getElementsByName("numcuotas")[0].style['visibility'] = 'hidden';
-                    document.getElementsByName("txtvalor")[0].style['visibility'] = 'hidden';
-                    document.getElementById("lblCuo").style['visibility'] = 'hidden';
-                    document.getElementById("lblVal").style['visibility'] = 'hidden';
-                    calcularCuotas();
-                }
-                else{
-                    document.getElementsByName("numcuotas")[0].value = "";
-                    document.getElementsByName("txtvalor")[0].value = "";
-                    document.getElementsByName("numcuotas")[0].style['visibility'] = 'visible';
-                    document.getElementsByName("txtvalor")[0].style['visibility'] = 'visible';
-                    document.getElementById("lblCuo").style['visibility'] = 'visible';
-                    document.getElementById("lblVal").style['visibility'] = 'visible';
+                combo = 1;
+                if(bandera==1){
+                    
+                    registrarCli();
+                }else{
+                    
+                    registrarordenpedido();
                 }
             }
             
+            function credito1(){
+                combo = 1;
+                if(bandera==1){
+                    
+                    registrarCli();
+                }else{
+                    
+                    registrarordenpedido();
+                }
+            }
             
+            function cbocredito(){
+                if(document.getElementsByName("cboxcredito")[0].value == "Credito"){
+                    combo = 2;
+                    openDialog(2);
+                    document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
+                }//else{
+                    
+                    //document.getElementById("crearboton").innerHTML = "<button id='btnRegistrarInv3' onclick='credito1();'>Registrar</button>";
+                    
+                //}
+            }
+            
+            function mostrarcampos(){
+                var numcuo = document.getElementsByName("numerosdecuotas")[0].value;
+                var i;
+                
+                document.getElementById("preciotxt").innerHTML = document.getElementsByName("valorsuma")[0].value;
+                document.getElementById("campos").innerHTML = "";
+                    for(i=1;i<=numcuo;i++){
+                        document.getElementById("campos").innerHTML += "<div class='div_form'><label style='width:150px;'>Cuota #"+i+"</label>\n\
+                        <input name='txtcuotas' style='margin-top:5px; position:relative; left:-50px;' type='number'/></div><br/>";
+                        
+                    } 
+                  //document.getElementById("campos").innerHTML += "";
+                  
+            }
+            
+            function verificarcampos(){
+                var txt1 = document.getElementsByName("txtcuotas");
+                var val  = document.getElementsByName("valorsuma")[0].value;
+                var tot = 0;var sum = 0;
+                    for(var i = 0; i<txt1.length; i++){
+                        //alert(txt1[i].value);
+                        sum = txt1[i].value;
+                        tot = tot+parseInt(sum);
+                        //alert(tot);
+                    }   
+                    if(tot==val){
+                        if(bandera==1){
+                            
+                            registrarCli();
+                        }else{
+                            
+                            registrarordenpedido();
+                        }
+                    }else{
+                        alert("Error al digitar las cuotas el total de las cuotas no es igual al valor del producto");
+                    }
+                    
+            }
+            
+            function redireccionar(){
+                location.href = "mod_fecha_instalacion.php";
+            }
+            
+            ////////Abrir opendialogo clientes registrados
+            function mostrarclientes(){
+                openDialog(1);
+            }
+            
+            /////Abrir ventanas
             function openDialog(ban) {
                 if(ban == 0){
                     Avgrund.show( "#msg-popup" );
@@ -616,6 +707,9 @@ if(isset($_SESSION['user'])){
                 }
                 if(ban == 2){
                     Avgrund.show( "#categoria-cliente" );
+                }
+                if(ban == 3){
+                    Avgrund.show( "#categoria-vendedor" );
                 }
             }
             function closeDialog() {
@@ -664,7 +758,7 @@ if(isset($_SESSION['user'])){
                     <div class=icon> 
                     <div id="icon-pedido"></div>
                     </div>
-                      <a href="ordenpedido.php"><span>Orden de pedido</span></a>
+                      <a href="orden_pedido.php"><span>Orden de pedido</span></a>
                   </div>
                </li>
                <li class="var_nav">
@@ -735,15 +829,21 @@ if(isset($_SESSION['user'])){
         </div>
 
         <div id="div_formularios2" >
-            <div class="rectangle"><h2> Orden De Pedido</h2></div> 
+            <div class="rectangle"><h2> Clientes</h2></div> 
             <div class="triangle-l"></div>
             
-            <div class="rectangle1"><h2> Referencias</h2></div> 
+            <div class="rectangle1"><h2> Referencias Familiares</h2></div> 
             <div class="triangle-l1"></div>
+            
+            <div class="rectangle2"><h2> Modelo Del Purificador</h2></div> 
+            <div class="triangle-l2"></div>
+            
+            <div class="rectangle3"><h2> Plan De Pago</h2></div> 
+            <div class="triangle-l3"></div>
 
-                <!--<button onclick="javascript:openDialog();">Open Avgrund</button>-->
-                <form target="_blank" class="contact_form" name="frm_reg" action="javascript:registrarCli();" method="post">
-                    <div id="div_">
+                <!--<button onclick="javascript:openDialog(); action="javascript:credito();"">Open Avgrund</button>-->
+                <form class="contact_form" name="frm_reg" id="form_id"   method="post" target="_blank">
+                    <div id="div_4">
                         
                         <div class="div_form">
                             <label class="label1">Cedula</label><br /> <br /> 
@@ -767,7 +867,7 @@ if(isset($_SESSION['user'])){
                         
                          <div class="div_form">
                             <label>Telefono</label><br /> <br /> 
-                            <input name="txttelefono" type="number"   required />
+                            <input name="txttelefono" type="tel"   required />
                         </div>
                         
                         <div class="div_form">
@@ -775,108 +875,137 @@ if(isset($_SESSION['user'])){
                             <input name="txtcorreo" type="text"   required /><br/>
                         </div>
                         
-                        <div class="div_form1">
-                            <label>Referencia Familiar</label><br /> <br /><br/> 
-                            <input name="txtreferenciafamiliar" type="text" required  />
+                        <div class="div_form" >
+                            <label>Direccion Oficina</label><br /> <br /> 
+                            <input name="txtdiroficina" type="text"  required /><br/>
                         </div>
                         
-                        <div class="div_form1">
-                            <label>Telefono</label><br /> <br /><br/> 
-                            <input name="txtreferenciatelefono" type="number" required  />
+                        <div class="div_form" >
+                            <label>Labor</label><br /> <br /> 
+                            <input name="txtlabor" type="text"  required /><br/>
                         </div>
                         
-                        <div class="div_form1">
-                            <label>Referencia Familiar</label><br /> <br /> <br/>
-                            <input name="txtreferenciafamiliar1" type="text" required  />
+                        <div class="div_form" >
+                            <label></label><br /> <br /> 
+                            <input  type="hidden"   /><br/><br/>
                         </div>
                         
-                        <div class="div_form">
-                            <label>Telefono</label><br /> <br /> 
-                            <input name="txtreferenciatelefono1" type="number" required />
-                        </div>
-                        
-                        <div class="div_form">
+                        <div class="div_form" >
                             <label>Conyuge - Codeudor</label><br /> <br /> 
-                            <input name="textconyuge" type="text" required />
+                            <input name="textconyuge" type="text"  />
                         </div>
                         
                         <div class="div_form">
                             <label>Cedula O NIT</label><br /> <br /> 
-                            <input name="txtnit" type="number" required  />
+                            <input name="txtnit" type="number"   />
                         </div>
                         
                         <div class="div_form">
                             <label>Direccion Oficina</label><br /> <br /> 
-                            <input name="txtconyugedireccion" type="text" required  />
+                            <input name="txtconyugedireccion" type="text"   />
                         </div>
                         
                         <div class="div_form">
                             <label>Telefono</label><br /> <br /> 
-                            <input name="txtconyugetelefono" type="number" required />
+                            <input name="txtconyugetelefono" type="tel"  />
                         </div>
                         
                         <div class="div_form">
-                            <label>Referencia Familiar</label><br /> <br /> 
-                            <input name="txtreferenciaconyuge" type="text"  required  />
+                            <label >Referencia Del Codeudor</label><br /> <br /> 
+                            <input name="txtreferenciaconyuge" type="text"    />
                         </div>
                         
                         <div class="div_form">
-                            <label>Telefono</label><br /> <br /> 
-                            <input name="txtreferenciaconyugetel" type="number"  required />
+                            <label>Telefono De La Referencia</label><br /> <br /> 
+                            <input name="txtreferenciaconyugetel" type="tel"   /><br/><br/><br/><br/><br/>
                         </div>
                         
+                        <div class="div_form">
+                            <label>Referencia Familiar</label><br /> <br /><br/> 
+                            <input name="txtreferenciafamiliar" type="text"   />
+                        </div>
                         
                         <div class="div_form">
-                            <label class="">Instalacion De Un:</label><br /> 
-                            <select name="cboxCategoria" required class="relleno" onclick="javascript:consultaTipo();">
+                            <label>Telefono</label><br /> <br /><br/> 
+                            <input name="txtreferenciatelefono" type="number"   />
+                        </div>
+                        
+                        <div class="div_form" >
+                            <label></label><br /> <br /> 
+                            <input  type="hidden"  /><br/><br/><br/>
+                        </div>
+                        
+                        <div class="div_form">
+                            <label>Referencia Familiar</label><br /> <br /> <br/>
+                            <input name="txtreferenciafamiliar1" type="text"   />
+                        </div>
+                        
+                        <div class="div_form">
+                            <label>Telefono</label><br /> <br /> <br/>
+                            <input name="txtreferenciatelefono1" type="tel"  />
+                        </div>
+                        
+                        <div class="div_form" >
+                            <label></label><br /> <br /> 
+                            <input  type="hidden" /><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
+                        
+                        <div class="div_form">
+                            <label class="">Instalacion De Un:</label><br /><br />
+                            <select name="cboxCategoria" class="relleno" onclick="javascript:consultaTipo();">
                                 
                             </select>
                         </div>
                         
                         <div class="div_form">
-                            <label>Tipo</label><br /> <br /> 
-                            <!--<input name="txtreferenciaconyugetel" type="text"  placeholder="ref"/>-->
-                            <select name="cboxtiponventario" required onclick="javascript:consultaInvetario();"></select>
+                            <label>REF.:</label><br /> <br /> 
+                            <select name="cboxtiponventario" onclick="javascript:consultaInvetario();"></select>
                         </div>
                         
                         <div class="div_form">
-                            <label>Referencia</label><br /> <br /> 
-                            <select name="cboxinventario" required onclick="javascript:consultavalor();"></select>
+                            <label>Ref.:</label><br /> <br /> 
+                            <select name="cboxinventario" onclick="javascript:consultavalor();"></select>
                         </div>
                         
                         <div class="div_form">
-                            <label>Forma De Pago:</label><br /> <br />
-                            <select name="cboxcredito" required onchange="javascript:cambioTXT();">
-                                <option value="Contado">Contado</option>
-                                <option value="Credito">Credito</option>
-                            </select>
-                        </div>
-                        
-                        <div class="div_form">
-                            <label>Suma De:</label><br /> <br /> 
-                            <input name="valorsuma" required type="number"/>
-                        </div>
-                        
-                        <div class="div_form2">
                             <label>Color</label><br /> <br /> 
                             <input name="descripcion_color" type="text"/>
                         </div>
                         
-                        <div class="div_form3">
-                            <label id="lblCuo"># Cuotas</label><br /> <br /> 
-                            <input name="numcuotas" required type="number"/>
+                        <div class="div_form" >
+                            <label></label><br /> <br /> 
+                            <input  type="hidden" /><br/><br/><br/><br/><br/><br/><br/>
                         </div>
                         
-                        <div class="div_form4">
-                            <label id="lblVal">Valor Cuotas</label><br /> <br /> 
-                            <input name="txtvalor" required type="number" onfocus="javascript:calcularCuotas();"/>
+                        <div class="div_form" >
+                            <label></label><br /> <br /> 
+                            <input  type="hidden" /><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
+                        <!--aqui va Fecha instalacion -->
+                        <div class="div_form">
+                            <label>Fecha Instalacion:</label><br /> <br /> 
+                            <input name="fecha_instalacion" type="date" /><br/><br/>
                         </div>
                         
                         <div class="div_form">
-                            <label>Fecha Instalacion:</label><br /> <br /> 
-                            <input name="fecha_instalacion" type="date" required/>
+                            <label>Suma De:</label><br /> <br /> 
+                            <input name="valorsuma" type="text"/>
                         </div>
-                        <!--<input type="submit" value="Registrar" />-->
+                        
+                        <div class="div_form">
+                            <label>Vendedor:</label><br /> <br /> 
+                            <select name="cboxvendedor">
+                                
+                            </select>
+                        </div>
+                        
+                        <div class="div_form">
+                            <label>Forma De Pago:</label><br /> <br />
+                            <select name="cboxcredito" onclick="javascript:cbocredito();">
+                                <option value="Contado">Contado</option>
+                                <option value="Credito">Credito</option>
+                            </select>
+                        </div>
                         
                         <div class="div_form">
                             <input name="ocultartipo" type="text" style="visibility: hidden" />
@@ -886,15 +1015,18 @@ if(isset($_SESSION['user'])){
                             <input name="ocultarmodelo" type="text" style="visibility: hidden" />
                         </div>
                         
-                        <button id="btnRegistrarInv3" onclick="javascript:function(){document.frm_reg.submit();}" >Registrar</button>
-                        
-                        
+                        <!--<button id="btnRegistrarInv3" onsubmit="javascript:function(){document.frm_reg.submit();}" >Registrar</button>-->
+                        <div id="crearboton">
+                            
+                        </div>
                     </div>
                         
-                    
                 </form>
-                
-                <button id="btnRegistrarInv4" onclick="javascript:mostrarclientes()" >Clientes Registrados</button>
+                <button id="btnRegistrarInv3" onclick="javascript:credito();" >Registrar</button>
+                        
+                <button id="btnRegistrarInv5" onclick="javascript:mostrarclientes();">Clientes Registrados</button>
+                <button id="btnRegistrarInv33" onclick="javascript:redireccionar();">Modificar Fecha Instalacion</button>
+                <!--<button id="btnRegistrarInv8" onclick="javascript:mostrarvendedor()" >Registrar Vendedores</button>-->
                         
         </div>
         
@@ -917,11 +1049,13 @@ if(isset($_SESSION['user'])){
                                         <th>Direccion</th>
                                         <th>Telefono</th>
                                         <th>Correo</th>
+                                        <th>Direccion oficina</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -942,6 +1076,25 @@ if(isset($_SESSION['user'])){
                     
                 </form> 
             
+        </aside>
+        
+        <aside id="categoria-cliente" class="avgrund-popup9"> 
+            <form class="contact_form" action="javascript:mostrarcampos();">
+                
+                <h2 style="text-align: center; margin-left: 45px;">Registrar Cuotas</h2><br/>
+                <h3 style="color:#555555; margin-left: 65px;">Costo del producto: </h3>
+                <h3 style="color:#555555; margin-left: 260px; margin-top: -22px;" id="preciotxt"></h3>
+                
+                <div class="div_form" style="margin-bottom: 50px;">
+                    <label># Cuotas</label><br /> <br /> 
+                    <input name="numerosdecuotas" type="text"/><br/><br/>
+                </div>
+                 <button id="btnRegistrarInv6">Aceptar</button>
+                
+                 <div id="campos" style="margin-top: 10px; "> 
+                </div><br/>
+            </form>
+            <button id='btnRegistrarInv7' onclick='javascript:verificarcampos();'>Registrar</button>
         </aside>
         
         <div class="avgrund-cover"></div>
